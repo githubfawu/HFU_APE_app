@@ -29,6 +29,9 @@ namespace TestApp1.ViewModels
             AddItemCommand = new Command(OnAddItem);
         }
 
+        public Command AddItemCommand { get; set; }
+
+
         async Task ExecuteLoadItemsCommand()
         {
             IsBusy = true;

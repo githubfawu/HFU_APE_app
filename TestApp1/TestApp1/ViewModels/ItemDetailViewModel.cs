@@ -10,6 +10,7 @@ namespace TestApp1.ViewModels
     public class ItemDetailViewModel : BaseViewModel
     {
         private string itemId;
+        private string itemTestId;
         private string text;
         private string description;
         public string Id { get; set; }
@@ -39,6 +40,19 @@ namespace TestApp1.ViewModels
             }
         }
 
+        public string ItemTestId
+        {
+            get
+            {
+                return itemTestId;
+            }
+            set
+            {
+                itemTestId = value;
+                LoadTestItemId(value);
+            }
+        }
+
         public async void LoadItemId(string itemId)
         {
             try
@@ -51,6 +65,21 @@ namespace TestApp1.ViewModels
             catch (Exception)
             {
                 Debug.WriteLine("Failed to Load Item");
+            }
+        }
+
+        public async void LoadTestItemId(string itemId)
+        {
+            try
+            {
+                var testitem = await DataStore.GetTestItemAsync(itemId);
+                Id = testitem.Id;
+                Text = testitem.Text;
+                Description = testitem.Description;
+            }
+            catch (Exception)
+            {
+                Debug.WriteLine("Failed to Load TestItem");
             }
         }
     }
