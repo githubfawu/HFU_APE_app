@@ -12,9 +12,10 @@ namespace TestApp1.ViewModels
     {
         private Item _selectedItem;
 
+        private TestItem _selectedTestItem;
+
         public ObservableCollection<Item> Items { get; }
         public Command LoadItemsCommand { get; }
-        public Command AddItemCommand { get; }
         public Command<Item> ItemTapped { get; }
 
         public ItemsViewModel()
@@ -67,6 +68,16 @@ namespace TestApp1.ViewModels
             }
         }
 
+        public TestItem SelectedTestItem
+        {
+            get => _selectedTestItem;
+            set
+            {
+                SetProperty(ref _selectedTestItem, value);
+                OnItemSelected(value);
+            }
+        }
+
         private async void OnAddItem(object obj)
         {
             await Shell.Current.GoToAsync(nameof(NewItemPage));
@@ -79,6 +90,15 @@ namespace TestApp1.ViewModels
 
             // This will push the ItemDetailPage onto the navigation stack
             await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={item.Id}");
+        }
+
+        async void OnItemSelected(TestItem testitem)
+        {
+            if (testitem == null)
+                return;
+
+            // This will push the ItemDetailPage onto the navigation stack
+            await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={testitem.TestId}");
         }
     }
 }
