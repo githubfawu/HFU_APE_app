@@ -5,10 +5,27 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="FlightTracker.Views.LoginPage"
-             Shell.NavBarIsVisible="False">
+             Shell.NavBarIsVisible="False"
+             BackgroundImage="tracklog.jpg">
     <ContentPage.Content>
         <StackLayout Padding="10,0,10,0" VerticalOptions="Center">
-            <Button VerticalOptions="Center" Text="Login" Command="{Binding LoginCommand}"/>
+            <BoxView HeightRequest="10"/>
+            <Image HorizontalOptions="Center" WidthRequest="300" Source="Login.jpg"/>
+            <Frame BackgroundColor="#BF043055" HasShadow="False">
+                <StackLayout Orientation="Vertical" Spacing="10">
+                    <Entry x:Name="Benutzername" Text="{Binding Username}" Placeholder="Benutzername"   
+                           PlaceholderColor="White" HeightRequest="40"   
+                           Keyboard="Text"  
+                           TextColor="White"/>
+                    <Entry x:Name="Passwort" Text="{Binding Password}" Placeholder="Passwort"   
+                           PlaceholderColor="White" HeightRequest="40"   
+                           IsPassword="True"  
+                           TextColor="White"/>
+                </StackLayout>
+            </Frame>
+            <Button Command="{Binding LoginCommand}" Text="Anmelden" TextColor="White"  
+                    FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
+                    BackgroundColor="#088da5" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
