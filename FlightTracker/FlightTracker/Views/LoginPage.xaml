@@ -9,8 +9,8 @@
              BackgroundImage="tracklog.jpg">
     <ContentPage.Content>
         <StackLayout Padding="10,0,10,0" VerticalOptions="Center">
+            <Label FontSize="Large" Text="Flight-Tracker v0.1" />
             <BoxView HeightRequest="10"/>
-            <Image HorizontalOptions="Center" WidthRequest="300" Source="Login.jpg"/>
             <Frame BackgroundColor="#BF043055" HasShadow="False">
                 <StackLayout Orientation="Vertical" Spacing="10">
                     <Entry x:Name="Benutzername" Text="{Binding Username}" Placeholder="Benutzername"   
