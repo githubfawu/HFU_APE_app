@@ -10,7 +10,8 @@ namespace FlightTracker.Services
             App.Database.SaveUserAccountAsync(new UserAccount
             {
                 Username = "admin",
-                Password = "adminpw"
+                Password = "adminpw",
+                Role = "Administrator"
             });
         }
     }

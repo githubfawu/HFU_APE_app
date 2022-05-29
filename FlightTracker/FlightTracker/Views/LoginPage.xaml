@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             Title="{Binding Title}"
              mc:Ignorable="d"
              x:Class="FlightTracker.Views.LoginPage"
              Shell.NavBarIsVisible="False"
@@ -13,11 +14,11 @@
             <BoxView HeightRequest="10"/>
             <Frame BackgroundColor="#BF043055" HasShadow="False">
                 <StackLayout Orientation="Vertical" Spacing="10">
-                    <Entry x:Name="Benutzername" Text="{Binding Username}" Placeholder="Benutzername"   
+                    <Entry x:Name="TextboxUsername" Text="{Binding Username}" Placeholder="Benutzername"   
                            PlaceholderColor="White" HeightRequest="40"   
-                           Keyboard="Text"  
+                           Keyboard="Plain" 
                            TextColor="White"/>
-                    <Entry x:Name="Passwort" Text="{Binding Password}" Placeholder="Passwort"   
+                    <Entry x:Name="TextboxPassword" Text="{Binding Password}" Placeholder="Passwort"   
                            PlaceholderColor="White" HeightRequest="40"   
                            IsPassword="True"  
                            TextColor="White"/>

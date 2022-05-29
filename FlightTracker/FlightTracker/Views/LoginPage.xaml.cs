@@ -16,9 +16,7 @@ namespace FlightTracker.Views
             var vm = new LoginViewModel();
             this.BindingContext = vm;
 
-            SaveUser();
-            GetUser("admin");
-            
+            SaveUser();//To be moved
         }
 
         private async Task SaveUser()
@@ -28,12 +26,6 @@ namespace FlightTracker.Views
                 Username = "admin",
                 Password = "adminpw"
             });
-        }
-
-        private async Task GetUser(string username)
-        {
-            var result = await App.Database.GetUserAccountAsync(username);
-            DisplayAlert("UserAccount", result.Password, "OK");
         }
     }
 }

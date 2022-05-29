@@ -1,7 +1,7 @@
-﻿using FlightTracker.Views;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Threading.Tasks;
+using FlightTracker.Models;
+using FlightTracker.Views;
+
 using Xamarin.Forms;
 
 namespace FlightTracker.ViewModels
@@ -10,18 +10,43 @@ namespace FlightTracker.ViewModels
     {
         public Command LoginCommand { get; }
 
+        public string Username { get; set; }
+        public string Password { get; set; }
+
+
         public LoginViewModel()
         {
+            Title = "Anmeldung";
+            
             LoginCommand = new Command(OnLoginClicked);
         }
 
         private async void OnLoginClicked(object obj)
         {
-            // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
-            
-            
-            
-            await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
+            if (Username != "")
+            {
+                var user = await App.Database.GetUserAccountAsync(Username);
+                if (user != null)
+                {
+                    if (user.Password == Password)
+                    {
+                        App.Current.MainPage = new AboutPage();
+                    }
+                    else
+                    {
+                        //Passwort falsch
+                    }
+                }
+                else
+                {
+                    //User nicht gefunden
+                }
+
+            }
+            else
+            {
+                //User darf nicht leer sein
+            }
         }
     }
 }
