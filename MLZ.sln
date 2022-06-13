@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightTracker.Android", "Fl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightTracker.iOS", "FlightTracker\FlightTracker.iOS\FlightTracker.iOS.csproj", "{4EA08EFF-F4E5-404A-9EFC-E673B5166190}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightTracker", "FlightTracker\FlightTracker\FlightTracker.csproj", "{908FA7C5-3837-4747-A583-8D84DC6CB09D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightTracker", "FlightTracker\FlightTracker\FlightTracker.csproj", "{908FA7C5-3837-4747-A583-8D84DC6CB09D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

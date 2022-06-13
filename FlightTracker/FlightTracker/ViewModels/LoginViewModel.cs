@@ -10,8 +10,8 @@ namespace FlightTracker.ViewModels
     {
         public Command LoginCommand { get; }
 
-        public string Username { get; set; }
-        public string Password { get; set; }
+        private string Username { get; set; }
+        private string Password { get; set; }
 
 
         public LoginViewModel()
@@ -23,14 +23,15 @@ namespace FlightTracker.ViewModels
 
         private async void OnLoginClicked(object obj)
         {
-            if (Username != "")
+            if (Username == Username)
             {
                 var user = await App.Database.GetUserAccountAsync(Username);
                 if (user != null)
                 {
                     if (user.Password == Password)
                     {
-                        App.Current.MainPage = new AboutPage();
+                        //Meldung dass Login erfolgreich
+                        Application.Current.MainPage = new AppShell();
                     }
                     else
                     {
@@ -41,11 +42,10 @@ namespace FlightTracker.ViewModels
                 {
                     //User nicht gefunden
                 }
-
             }
             else
             {
-                //User darf nicht leer sein
+                //User darf nicht leer sein oder ist falsch
             }
         }
     }

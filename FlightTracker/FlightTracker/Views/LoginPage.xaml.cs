@@ -1,6 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using FlightTracker.ViewModels;
-using FlightTracker.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,20 +12,17 @@ namespace FlightTracker.Views
         public LoginPage()
         {
             InitializeComponent();
-            
+
             var vm = new LoginViewModel();
             this.BindingContext = vm;
 
-            SaveUser();//To be moved
+            get();
         }
 
-        private async Task SaveUser()
+        public async Task get()
         {
-            await App.Database.SaveUserAccountAsync(new UserAccount
-            {
-                Username = "admin",
-                Password = "adminpw"
-            });
+            var user = await App.Database.GetUserAccountAsync("admin");
+            await DisplayAlert("Info", user.Password, "OK");
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Threading.Tasks;
+using FlightTracker.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

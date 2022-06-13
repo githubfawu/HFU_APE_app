@@ -6,8 +6,8 @@
              Title="{Binding Title}"
              mc:Ignorable="d"
              x:Class="FlightTracker.Views.LoginPage"
-             Shell.NavBarIsVisible="False"
              BackgroundImage="tracklog.jpg">
+
     <ContentPage.Content>
         <StackLayout Padding="10,0,10,0" VerticalOptions="Center">
             <Label FontSize="Large" Text="Flight-Tracker v0.1" />
