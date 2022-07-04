@@ -7,6 +7,7 @@ using FlightTracker.Models;
 using FlightTracker.Validation;
 using Xamarin.Forms;
 
+[assembly: Xamarin.Forms.Dependency(typeof(ValidationService))]
 namespace FlightTracker.ViewModels
 {
     public class UserViewModel : BaseViewModel, ISelectableViewModel
@@ -15,7 +16,7 @@ namespace FlightTracker.ViewModels
         private Role role;
         private bool isAdministrator;
         private bool isUser;
-        private readonly UserValidation validation = new UserValidation();
+        readonly IValidationService validation = DependencyService.Get<IValidationService>();
         private readonly IParaglidingDbContext dbContext;
         public int Id { get => id; set => SetProperty(ref id, value); }
 

@@ -2,7 +2,6 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -11,13 +10,14 @@ using FlightTracker.Models;
 using FlightTracker.Validation;
 using Xamarin.Forms;
 
+[assembly: Xamarin.Forms.Dependency(typeof(ValidationService))]
 namespace FlightTracker.ViewModels
 {
-    public class FlightViewModel : BaseViewModel, ISelectableViewModel, IListViewModel, INotifyPropertyChanged
+    public class FlightViewModel : BaseViewModel, ISelectableViewModel, IListViewModel
     {
         private readonly IParaglidingDbContext dbContext;
         private Pilot selectedPilot;
-        private readonly FlightValidation validation = new FlightValidation();
+        readonly IValidationService validation = DependencyService.Get<IValidationService>();
 
         public FlightViewModel(IParaglidingDbContext dbContext)
         {
@@ -33,7 +33,7 @@ namespace FlightTracker.ViewModels
             this.CancelCommand = new Command(async () => await CancelCreate());
             this.SaveCommand = new Command(async () => await Save());
             this.LoadItemsCommand = new Command(() => LoadData());
-            
+
         }
         private async Task CancelCreate()
         {

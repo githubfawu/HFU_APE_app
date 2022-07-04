@@ -1,6 +1,7 @@
 ﻿using FlightTracker.DataAccess;
 using FlightTracker.DataAccess.Queries;
 using FlightTracker.DataAccess.Queries.Response;
+using FlightTracker.Validation;
 using FlightTracker.ViewModels;
 using Xamarin.Forms;
 
@@ -8,7 +9,6 @@ namespace FlightTracker
 {
     public partial class App : Application
     {
-
         public App()
         {
             System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("de-CH");
@@ -16,6 +16,8 @@ namespace FlightTracker
 
             DependencyService.Register<IParaglidingDbContext, ParaglidingDbContext>();
             DependencyService.RegisterSingleton<IMigrationHelper>(new MigrationHelper(DependencyService.Resolve<IParaglidingDbContext>()));
+            DependencyService.RegisterSingleton<IValidationService>(new ValidationService());
+            DependencyService.RegisterSingleton<ICrypto>(new Crypto());
 
             RegisterQueries();
             RegisterViewModels();

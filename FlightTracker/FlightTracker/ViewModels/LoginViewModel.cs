@@ -6,13 +6,14 @@ using FlightTracker.Models;
 using FlightTracker.Validation;
 using Xamarin.Forms;
 
+[assembly: Xamarin.Forms.Dependency(typeof(ValidationService))]
 namespace FlightTracker.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
         private readonly IDbQuery<(string, string), IdentityUser> identityQuery;
         private readonly IParaglidingDbContext dbContext;
-        private readonly LoginValidation validation = new LoginValidation();
+        readonly IValidationService validation = DependencyService.Get<IValidationService>();
 
         private bool isUserLoggedIn;
         private Pilot user;
