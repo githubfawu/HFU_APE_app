@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FlightTracker.Views.FlightPage"
+             Title="{Binding Title}">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Label Text="Flug erfassen" 
+                       FontSize="Large" 
+                       Margin="15" 
+                       HorizontalOptions="Center" 
+                       HorizontalTextAlignment="Center" 
+                       VerticalOptions="Center" 
+                       VerticalTextAlignment="Center"/>
+                <Grid ColumnSpacing="5" RowSpacing="5" Margin="15">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Name" Grid.Row="0" Grid.Column="0"/>
+                    <Label Text="Datum" Grid.Row="1" Grid.Column="0"/>
+                    <Label Text="Distanz" Grid.Row="2" Grid.Column="0"/>
+                    <Label Text="Flugdauer" Grid.Row="3" Grid.Column="0"/>
+                    <Label Text="Kommentare" Grid.Row="4" Grid.Column="0"/>
+                    <StackLayout Grid.Row="0" Grid.Column="1">
+                        <Picker ItemsSource="{Binding Pilots}" SelectedItem="{Binding SelectedPilot}" IsEnabled="{Binding IsAdminUser}"/>
+                    </StackLayout>
+                    <StackLayout Grid.Row="1" Grid.Column="1">
+                        <DatePicker Date="{Binding SelectedDate}" Format="dd.MMMM.yyyy" BackgroundColor="{Binding SelectedDateError, Converter={StaticResource ErrorColorConverter}}"/>
+                        <Label Text="{Binding SelectedDateError}" Style="{StaticResource ErrorLabel}"/>
+                    </StackLayout>
+                    <StackLayout Grid.Row="2" Grid.Column="1">
+                        <Entry Text="{Binding Distance}" Keyboard="Numeric" BackgroundColor="{Binding DistanceError, Converter={StaticResource ErrorColorConverter}}"/>
+                        <Label Text="{Binding DistanceError}" Style="{StaticResource ErrorLabel}"/>
+                    </StackLayout>
+                    <StackLayout Grid.Row="3" Grid.Column="1">
+                        <TimePicker Time="{Binding Duration}" Format="HH:mm:ss" BackgroundColor="{Binding DurationError, Converter={StaticResource ErrorColorConverter}}"/>
+                        <Label Text="{Binding DurationError}" Style="{StaticResource ErrorLabel}"/>
+                    </StackLayout>
+                    <StackLayout Grid.Row="4" Grid.Column="1">
+                        <Editor Text="{Binding Comments}" MaxLength="500" BackgroundColor="{Binding CommentsError, Converter={StaticResource ErrorColorConverter}}"/>
+                        <Label Text="{Binding CommentsError}" Style="{StaticResource ErrorLabel}"/>
+                    </StackLayout>                   
+                </Grid>
+                <StackLayout Spacing="15" Margin="20" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                    <Button Text="Abbrechen" Command="{Binding CancelCommand}" Background="{StaticResource DefaultColor}"/>
+                    <Button Text="Löschen" Command="{Binding DeleteCommand}" Background="{StaticResource DangerColor}"/>
+                    <Button Text="Speichern" Command="{Binding SaveCommand}" Background="{StaticResource SuccessColor}"/>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

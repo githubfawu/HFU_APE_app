@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FlightTracker.Views.UsersPage"
+             Title="Benutzer verwalten">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Hinzufügen" Command="{Binding AddCommand}" />
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content>
+        <StackLayout>
+           <SearchBar Placeholder="Suche..." Text="{Binding SearchText}"/>  
+        <RefreshView IsRefreshing="{Binding IsBusy}" Command="{Binding LoadItemsCommand}">
+            <CollectionView ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedUser}" SelectionMode="Single" SelectionChangedCommand="{Binding SelectedUserChangedCommand}">
+                <CollectionView.Header>            
+                    <Grid RowSpacing="3" ColumnSpacing="3" Background="{StaticResource InfoColor}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="70"/>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="120"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                        </Grid.RowDefinitions>
+                        <Label Text="ID" Padding="3,5" Grid.Column="0" Style="{StaticResource CollectionViewHeader}"/>
+                        <Label Text="Benutzer" Padding="3,5" Grid.Column="1" Style="{StaticResource CollectionViewHeader}"/>
+                        <Label Text="Vorname" Padding="3,5" Grid.Column="2" Style="{StaticResource CollectionViewHeader}"/>
+                        <Label Text="Nachname" Padding="3,5" Grid.Column="3" Style="{StaticResource CollectionViewHeader}"/>
+                        <Label Text="Rolle" Padding="3,5" Grid.Column="4" Style="{StaticResource CollectionViewHeader}"/>
+                    </Grid>                    
+                </CollectionView.Header>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid RowSpacing="5" ColumnSpacing="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="70"/>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="120"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                            </Grid.RowDefinitions>
+                            <Label Padding="3,5" Text="{Binding EmployeeNumber}" Grid.Column="0" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
+                            <Label Padding="3,5" Text="{Binding Username}" Grid.Column="1" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
+                            <Label Padding="3,5" Text="{Binding FirstName}" Grid.Column="2" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
+                            <Label Padding="3,5" Text="{Binding LastName}" Grid.Column="3" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
+                            <Label Padding="3,5" Text="{Binding Role}" Grid.Column="4" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>            
+        </RefreshView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FlightTracker.Views.HomePage"
+             xmlns:vm="clr-namespace:FlightTracker.ViewModels">
+
+    <Shell.TitleView>
+        <Grid BackgroundColor="{StaticResource Primary}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Text="Benutzer verwalten" Command="{Binding ManageUsersCommand}" IsVisible="{Binding IsAdminUser}" HorizontalOptions="Start"/>
+            <Button Grid.Column="1" Text="{Binding LoginCaption}" Command="{Binding LoginCommand}" HorizontalOptions="End"/>            
+        </Grid>
+    </Shell.TitleView>
+
+    <ContentPage.Content>
+         <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackLayout Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
+            <SearchBar Placeholder="Suchen..." Text="{Binding SearchText}" />
+        </StackLayout>
+        
+        <CollectionView Grid.Row="1" ItemsSource="{Binding Flights}" SelectedItem="{Binding SelectedFlight}" SelectionMode="Single" SelectionChangedCommand="{Binding FlightSelectionChangedCommand}">
+            <CollectionView.EmptyView>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <StackLayout IsVisible="{Binding IsLoggedIn, Converter={StaticResource InverseBoolConverter}}" Grid.Row="0" Spacing="15" Padding="20" Margin="20,150">
+                        <Label Text="Melde dich an um die Flüge zu sehen" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                        <Button Text="Anmelden" Command="{Binding LoginCommand}"/>
+                    </StackLayout>
+                    <Label IsVisible="{Binding IsLoggedIn}" Grid.Row="1" Text="Keine verfügbare Flüge" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                </Grid>
+            </CollectionView.EmptyView>
+            <CollectionView.Header>
+                <Grid ColumnSpacing="3" Background="{StaticResource InfoColor}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="90"/>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="70"/>
+                        <ColumnDefinition Width="70"/>
+                    </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                        </Grid.RowDefinitions>
+                    <Label Text="Pilot" Grid.Column="0" Style="{StaticResource CollectionViewHeader}"/>
+                    <Label Text="Datum" Grid.Column="1" Style="{StaticResource CollectionViewHeader}"/>
+                    <Label Text="Distanz" Grid.Column="2" Style="{StaticResource CollectionViewHeader}"/>
+                    <Label Text="Flugdauer" Grid.Column="3" Style="{StaticResource CollectionViewHeader}"/>
+                </Grid>
+            </CollectionView.Header>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid ColumnSpacing="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="90"/>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="70"/>
+                            <ColumnDefinition Width="70"/>
+                        </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                            </Grid.RowDefinitions>
+                            <Label Text="{Binding Owner}" Grid.Column="0" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                            <Label Text="{Binding Date, StringFormat='{0:dd.MMMM.yyyy}'}" Grid.Column="1" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                            <Label Text="{Binding Distance}" Grid.Column="2" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                            <Label Text="{Binding Duration}" Grid.Column="3" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+    </ContentPage.Content>
+</ContentPage>

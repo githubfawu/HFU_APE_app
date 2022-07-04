@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FlightTracker.Views.UserPage"
+             Title="{Binding Title}">
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Label Text="Benutzer erfassen" 
+                       FontSize="Large" 
+                       Margin="15" 
+                       HorizontalOptions="Center" 
+                       HorizontalTextAlignment="Center" 
+                       VerticalOptions="Center" 
+                       VerticalTextAlignment="Center"/>
+                <Grid ColumnSpacing="5" RowSpacing="5" Margin="15">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Benutzername" Grid.Row="0" Grid.Column="0"/>
+                    <Label Text="Vorname" Grid.Row="1" Grid.Column="0"/>
+                    <Label Text="Nachname" Grid.Row="2" Grid.Column="0"/>
+                    <Label Text="Passwort" Grid.Row="3" Grid.Column="0"/>
+                    <Label Text="Passwort bestätigen" Grid.Row="4" Grid.Column="0"/>
+                    <Label Text="Rolle" Grid.Row="5" Grid.Column="0"/>
+                    <StackLayout Grid.Row="0" Grid.Column="1">
+                        <Entry Text="{Binding Username}" BackgroundColor="{Binding UsernameError, Converter={StaticResource ErrorColorConverter}}"/>
+                        <Label Text="{Binding UsernameError}" Style="{StaticResource ErrorLabel}"/>
+                    </StackLayout>
+                    <StackLayout Grid.Row="1" Grid.Column="1">
+                        <Entry Text="{Binding FirstName}" BackgroundColor="{Binding FirstNameError, Converter={StaticResource ErrorColorConverter}}"/>
+                        <Label Text="{Binding FirstNameError}" Style="{StaticResource ErrorLabel}"/>
+                    </StackLayout>
+                    <StackLayout Grid.Row="2" Grid.Column="1">
+                        <Entry Text="{Binding LastName}" BackgroundColor="{Binding LastNameError, Converter={StaticResource ErrorColorConverter}}"/>
+                        <Label Text="{Binding LastNameError}" Style="{StaticResource ErrorLabel}"/>
+                    </StackLayout>
+                    <StackLayout Grid.Row="3" Grid.Column="1">
+                        <Entry Text="{Binding Password}" IsPassword="True" BackgroundColor="{Binding PasswordError, Converter={StaticResource ErrorColorConverter}}"/>
+                        <Label Text="{Binding PasswordError}" Style="{StaticResource ErrorLabel}"/>
+                    </StackLayout>
+                    <StackLayout Grid.Row="4" Grid.Column="1">
+                        <Entry Text="{Binding PasswordConfirmation}" IsPassword="True" BackgroundColor="{Binding PasswordConfirmationError, Converter={StaticResource ErrorColorConverter}}"/>
+                        <Label Text="{Binding PasswordConfirmationError}" Style="{StaticResource ErrorLabel}"/>
+                    </StackLayout>
+                    <StackLayout Grid.Row="5" Grid.Column="1" Orientation="Vertical">
+                        <RadioButton Content="Administrator" IsChecked="{Binding IsAdministrator}"/>
+                        <RadioButton Content="Benutzer" IsChecked="{Binding IsUser}"/>
+                    </StackLayout>
+                </Grid>
+                <StackLayout Spacing="15" Margin="20" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                    <Button Text="Abbrechen" Command="{Binding CancelCommand}" Background="{StaticResource DangerColor}"/>
+                    <Button Text="Speichern" Command="{Binding SaveCommand}" Background="{StaticResource DefaultColor}"/>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

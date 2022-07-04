@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="FlightTracker.Views.LoginPage"
+             Shell.PresentationMode="ModalAnimated"
+             Shell.NavBarIsVisible="False">
+    <ContentPage.Content>
+       
+        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+            <Grid Padding="10,0,10,0" VerticalOptions="Center" Margin="50" IsVisible="{Binding IsUserLoggedIn, Converter={StaticResource InverseBoolConverter}}">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>                
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <Label Grid.Row="0" 
+                       Grid.Column="0"
+                       Grid.ColumnSpan="2"
+                       Text="Anmeldung" 
+                       FontSize="Large" 
+                       Margin="15" 
+                       HorizontalOptions="Center" 
+                       HorizontalTextAlignment="Center" 
+                       VerticalOptions="Center" 
+                       VerticalTextAlignment="Center"
+                       TextColor="{StaticResource LightTextColor}"/>
+            <Label Text="Benutzename" Grid.Row="1" Grid.Column="0" VerticalTextAlignment="Center" Margin="0,0,0,15"/>
+        <StackLayout Grid.Row="1"  Grid.Column="1">
+                    <Entry Text="{Binding Username}" MaxLength="50" BackgroundColor="{Binding UsernameError, Converter={StaticResource ErrorColorConverter}}"/>
+                    <Label Text="{Binding UsernameError}" Style="{StaticResource ErrorLabel}"/>
+        </StackLayout>
+
+            <Label Text="Passwort" Grid.Row="2" Grid.Column="0" VerticalTextAlignment="Center" Margin="0,0,0,15"/>
+            <StackLayout Grid.Row="2" Grid.Column="1">
+                    <Entry Text="{Binding Password}" IsPassword="True" MaxLength="20" BackgroundColor="{Binding PasswordError, Converter={StaticResource ErrorColorConverter}}"/>
+                    <Label Text="{Binding PasswordError}" Style="{StaticResource ErrorLabel}"/>
+                </StackLayout>
+                <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" VerticalOptions="Center" Text="Anmelden" Command="{Binding LoginCommand}" Background="{StaticResource SuccessColor}"/>
+        </Grid>
+        <Grid Padding="10,0,10,0" VerticalOptions="Center" Margin="50" IsVisible="{Binding IsUserLoggedIn}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" 
+                       Grid.Column="0"
+                       Grid.ColumnSpan="2"
+                       Text="Profil" 
+                       FontSize="Large" 
+                       Margin="15" 
+                       HorizontalOptions="Center" 
+                       HorizontalTextAlignment="Center" 
+                       VerticalOptions="Center" 
+                       VerticalTextAlignment="Center"
+                       TextColor="{StaticResource LightTextColor}"/>
+                <Label Text="Name" Grid.Row="1" Grid.Column="0"/>
+            <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
+                <Label Text="{Binding User.FirstName}" />
+                <Label Text="{Binding User.LastName}" />
+            </StackLayout>
+            <Label Text="Role" Grid.Row="2" Grid.Column="0"/>
+            <Label Text="{Binding User.Role}" Grid.Row="2" Grid.Column="1"/>
+                <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="25" VerticalOptions="Center" Text="Abmelden" Command="{Binding LogoutCommand}" Background="{StaticResource DangerColor}"/>
+        </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
