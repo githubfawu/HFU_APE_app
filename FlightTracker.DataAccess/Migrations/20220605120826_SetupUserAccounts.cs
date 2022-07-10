@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 using FlightTracker.DataAccess.Entities;
 using FlightTracker.DataAccess.Helpers;
+using Xamarin.Forms;
 
 namespace FlightTracker.DataAccess.Migrations
 {
@@ -24,7 +25,7 @@ namespace FlightTracker.DataAccess.Migrations
                     "User",
                     (int)Role.Administrator,
                     "admin",
-                    Obfuscator.Encrypt("admin123")
+                    Obfuscator.Encrypt("admin")
                 });
 
             // Creates a User user
@@ -43,7 +44,7 @@ namespace FlightTracker.DataAccess.Migrations
                     "User",
                     (int)Role.User,
                     "user",
-                    Obfuscator.Encrypt("user123")
+                    Obfuscator.Encrypt("user")
                 });
         }
 

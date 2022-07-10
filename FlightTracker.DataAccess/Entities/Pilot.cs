@@ -7,7 +7,6 @@ namespace FlightTracker.DataAccess.Entities
     public class Pilot : IEntity
     {
         private string? password;
-
         public int Id { get; set; }
         [Required]
         [MaxLength(255)]
@@ -22,10 +21,10 @@ namespace FlightTracker.DataAccess.Entities
         public Role Role { get; set; }
 
         [Required, MaxLength(50)]
-        public string Password 
-        { 
-            get =>  Obfuscator.Decrypt(password); 
-            set => password = Obfuscator.Encrypt(value); 
+        public string Password
+        {
+            get => Obfuscator.Decrypt(password);
+            set => password = Obfuscator.Encrypt(value);
         }
 
         public virtual ICollection<Flight> Flights { get; set; } = new List<Flight>();

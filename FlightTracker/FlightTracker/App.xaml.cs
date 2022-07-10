@@ -16,8 +16,8 @@ namespace FlightTracker
 
             DependencyService.Register<IParaglidingDbContext, ParaglidingDbContext>();
             DependencyService.RegisterSingleton<IMigrationHelper>(new MigrationHelper(DependencyService.Resolve<IParaglidingDbContext>()));
-            DependencyService.RegisterSingleton<IValidationService>(new ValidationService());
-            DependencyService.RegisterSingleton<ICrypto>(new Crypto());
+            //DependencyService.RegisterSingleton<IValidationService>(new ValidationService());
+            //DependencyService.RegisterSingleton<ICryptoService>(new CryptoService());
 
             RegisterQueries();
             RegisterViewModels();

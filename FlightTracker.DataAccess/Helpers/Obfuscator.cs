@@ -15,7 +15,6 @@ namespace FlightTracker.DataAccess.Helpers
         public static string Decrypt(string text)
         {
             return Encoding.UTF8.GetString(Convert.FromBase64String(text));
-
         }
     }
 }

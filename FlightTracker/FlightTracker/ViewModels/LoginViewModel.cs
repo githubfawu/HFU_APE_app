@@ -6,7 +6,6 @@ using FlightTracker.Models;
 using FlightTracker.Validation;
 using Xamarin.Forms;
 
-[assembly: Xamarin.Forms.Dependency(typeof(ValidationService))]
 namespace FlightTracker.ViewModels
 {
     public class LoginViewModel : BaseViewModel

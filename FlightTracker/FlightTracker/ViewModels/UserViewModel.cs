@@ -7,7 +7,7 @@ using FlightTracker.Models;
 using FlightTracker.Validation;
 using Xamarin.Forms;
 
-[assembly: Xamarin.Forms.Dependency(typeof(ValidationService))]
+//[assembly: Xamarin.Forms.Dependency(typeof(ValidationService))]
 namespace FlightTracker.ViewModels
 {
     public class UserViewModel : BaseViewModel, ISelectableViewModel
@@ -16,9 +16,15 @@ namespace FlightTracker.ViewModels
         private Role role;
         private bool isAdministrator;
         private bool isUser;
-        readonly IValidationService validation = DependencyService.Get<IValidationService>();
+        //private IValidationService validationService;
+        private IValidationService validationService = new ValidationService();
         private readonly IParaglidingDbContext dbContext;
         public int Id { get => id; set => SetProperty(ref id, value); }
+
+        public UserViewModel()
+        {
+            //this.validationService = DependencyService.Get<IValidationService>();
+        }
 
         #region Property Username
         private string usernameError;
@@ -39,7 +45,7 @@ namespace FlightTracker.ViewModels
             set
             {
                 username = value;
-                UsernameError = validation.IsUsernameOutOfRange(username);
+                UsernameError = validationService.IsUsernameOutOfRange(username);
                 OnPropertyChanged(nameof(Username));
             }
         }
@@ -64,7 +70,7 @@ namespace FlightTracker.ViewModels
             set
             {
                 firstName = value;
-                FirstNameError = validation.IsFirstNameOutOfRange(firstName);
+                FirstNameError = validationService.IsFirstNameOutOfRange(firstName);
                 OnPropertyChanged(nameof(FirstName));
             }
         }
@@ -89,7 +95,7 @@ namespace FlightTracker.ViewModels
             set
             {
                 lastName = value;
-                LastNameError = validation.IsLastNameOutOfRange(lastName);
+                LastNameError = validationService.IsLastNameOutOfRange(lastName);
                 OnPropertyChanged(nameof(LastName));
             }
         }
@@ -114,7 +120,7 @@ namespace FlightTracker.ViewModels
             set
             {
                 password = value;
-                PasswordError = validation.IsPasswordOutOfRange(password);
+                PasswordError = validationService.IsPasswordOutOfRange(password);
                 OnPropertyChanged(nameof(Password));
             }
         }
@@ -139,7 +145,7 @@ namespace FlightTracker.ViewModels
             set
             {
                 passwordConfirmation = value;
-                PasswordConfirmationError = validation.IsPasswordConfirm(passwordConfirmation, Password);
+                PasswordConfirmationError = validationService.IsPasswordConfirm(passwordConfirmation, Password);
                 OnPropertyChanged(nameof(PasswordConfirmation));
             }
         }

@@ -27,10 +27,10 @@ namespace FlightTracker.Tests
         public void EncryptUserName()
         {
             //ICrypto crypto = DependencyService.Get<ICrypto>();
-            Crypto crypto = new Crypto();
+            CryptoService crypto = new CryptoService();
             //Act
-            var result = crypto.Encrypt("Hallo Velo");
-            string expectedAnswer = "x1Rdms3cVsOeiSn0448FXAKf1kS5s/odFyQactZX5TPzOMvwWa97/EsOvE+saH8="; //Not possible to expect the encrypted value
+            var result = crypto.Encrypt("admin");
+            string expectedAnswer = "adminencrypted"; //Not possible to expect the encrypted value
             // Assert
             Assert.AreEqual(expectedAnswer, result);
         }
@@ -39,10 +39,10 @@ namespace FlightTracker.Tests
         public void DecryptUserName()
         {
             //ICrypto crypto = DependencyService.Get<ICrypto>();
-            Crypto crypto = new Crypto();
+            CryptoService crypto = new CryptoService();
             //Act
-            var result = crypto.Decrypt("iIg0Gfd8IWZoY/U1a7Lj2m61YBo1YbKybCFd9WKQSXXB+osgszWbqguqynNnqNY=");
-            string expectedAnswer = "Hallo Velo";
+            var result = crypto.Decrypt("pfVYHp4FvUMtx/WKnZ6Uc2o+L71jX295Gx4tYThSBA==");
+            string expectedAnswer = "admin";
             // Assert
             Assert.AreEqual(expectedAnswer, result);
         }
