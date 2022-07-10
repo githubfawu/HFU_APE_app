@@ -52,7 +52,6 @@
             </LinearGradientBrush>
 
             <converters1:InverseBoolConverter x:Key="InverseBoolConverter"/>
-            <converters1:IsCollectionNotEmptyConverter x:Key="IsCollectionNotEmptyConverter"/>
             <converters:ErrorColorConverter x:Key="ErrorColorConverter"/>
 
             <Style TargetType="Label" x:Key="CollectionViewHeader">

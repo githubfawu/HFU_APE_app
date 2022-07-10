@@ -1,15 +1,21 @@
-using FlightTracker.Converters;
+using System.Windows.Input;
 using FlightTracker.DataAccess;
-using FlightTracker.DataAccess.Entities;
+using FlightTracker.Models;
 using FlightTracker.Validation;
 using FlightTracker.ViewModels;
-using Xamarin.Forms;
+using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using Xamarin.Essentials;
+
 
 namespace FlightTracker.Tests
 {
     [TestClass]
-    public class LogicTests
+    public class Tests
     {
+        public ICommand SaveCommand { get; }
+        private IParaglidingDbContext dbContext = new ParaglidingDbContext();
+
         [TestMethod]
         public void TestCommentValidation()
         {
@@ -24,27 +30,43 @@ namespace FlightTracker.Tests
         }
 
         [TestMethod]
-        public void EncryptUserName()
+        public async Task TestSaveNewUser()
         {
-            //ICrypto crypto = DependencyService.Get<ICrypto>();
-            CryptoService crypto = new CryptoService();
+            //Arrange
+            UserViewModel userViewmodel = new UserViewModel();
+
             //Act
-            var result = crypto.Encrypt("admin");
-            string expectedAnswer = "adminencrypted"; //Not possible to expect the encrypted value
+            await dbContext.Pilots.AddAsync(new DataAccess.Entities.Pilot
+            {
+                FirstName = "TestFirstName",
+                LastName = "TestLastName",
+                Username = "TestUsername",
+                Role = Role.User,
+                Password = "Password",
+            });
+            await dbContext.SaveAsync();
+            Thread.Sleep(150);
+
             // Assert
-            Assert.AreEqual(expectedAnswer, result);
+            var isUserNameInDB =
+                (await dbContext.Pilots.FirstOrDefaultAsync(p => EF.Functions.Like(p.Username, $"TestUsername"))) != null;
+            
+            Assert.AreEqual("TestUsername", isUserNameInDB);//Not possible -> No local DB-Instance running
         }
 
         [TestMethod]
-        public void DecryptUserName()
+        public void GetNewSession()
         {
-            //ICrypto crypto = DependencyService.Get<ICrypto>();
-            CryptoService crypto = new CryptoService();
+            //Arrange
+            Preferences.Set(nameof(Session), new Session("Test", DateTime.UtcNow, "Test", Role.User).ToString());
+
             //Act
-            var result = crypto.Decrypt("pfVYHp4FvUMtx/WKnZ6Uc2o+L71jX295Gx4tYThSBA==");
-            string expectedAnswer = "admin";
+            var session = Preferences.Get(nameof(Session), null);
+
             // Assert
-            Assert.AreEqual(expectedAnswer, result);
+            Assert.AreEqual(Session.Get(), session); //Not possible due to different .net-Targets
         }
+
+
     }
 }
